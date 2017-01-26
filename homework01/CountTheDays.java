@@ -23,9 +23,16 @@
  *  @version 1.0.0  2017-01-13  B.J. Johnson  Initial writing and release
  *  @version 2.0.0  2017-01-25  Anthony Modica First draft code
  *  @version 3.0.0  2017-01-26  Anthony Modica Second draft code
+ *  @version 4.0.0  2017-01-26  Anthony Modica Added that there has to be six arguments for the two dates for the code to run
  */
- public class CountTheDays {
+public class CountTheDays {
    public static void main( String args[] ) {
+
+     if (args.length != 6){
+       System.out.println("\n Error! Not a valid six argument date");
+       System.exit(1);
+     }
+
      long month1 = Long.parseLong(args[0]);
      long day1 = Long.parseLong(args[1]);
      long year1 = Long.parseLong(args[2]);
@@ -34,7 +41,7 @@
      long year2 = Long.parseLong(args[5]);
 
      if (CalendarStuff.isValidDate(month1, day1, year1) == false || CalendarStuff.isValidDate(month2, day2, year2) == false) {
-       System.out.println("\n You entered an invalid date");
+       System.out.println("\n Error! Invalid date");
      } else {
        System.out.println(CalendarStuff.daysBetween(month1, day1, year1, month2, day2, year2));
      }
