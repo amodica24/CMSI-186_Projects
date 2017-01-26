@@ -19,7 +19,9 @@
  *  ----------------
  *            Rev      Date     Modified by:  Reason for change/modification
  *           -----  ----------  ------------  -----------------------------------------------------------
- *  @version 1.0.0  2017-01-02  Anthony Modica  Initial writing and release
+ *  @version 1.0.0  2017-01-02  B.J. Johnson   Initial writing and release
+ *  @version 2.0.0  2017-01-25  Anthony Modica Inserting first draft code
+ *  @version 3.0.0  2017-01-27  Anthony Modica Inserting second draft code
  */
  
  public class CalendarStuff {
@@ -204,35 +206,54 @@ if (year1 > year2) {
    * @param    year2  long   containing four-digit year
    * @return          long   count of total number of days
    */
-   public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2 ) {
-      if (compareDate( month1, day1, year1, month2, day2, year2 )==1) {
-        long tempDay = day1;
-        long tempMonth = month1;
-        long tempYear = year1;
-        year1 = year2;
-        month1 = month2;
-        day1 = day2;
-        year2 = tempYear;
-        month2 = tempMonth;
-        day2 = tempDay;
-      }
+   
+  public static long daysBetween( long month1, long day1, long year1, long month2, long day2, long year2 ) {
+     long dayCount = 0;
 
-      long dayCount = 0;
-      long dayDifference = day2 - day1;
-      long monthDifference = 0;
-      long yearDifference = 0;
-      for (long a = month1; a < month2; a++) {
-        monthDifference += daysInMonth(a, year2);
-      }
-      for (long i = year1; i < year2; i++) {
-        if (isLeapYear(i)) {
-          yearDifference += 366;
-        } else {
-          yearDifference += 365;
-        }
-      }
+     if (dateEquals(month1, day1, year1, month2, day2, year2) == true) {
 
-      dayCount = dayDifference + monthDifference + yearDifference;
-      return dayCount;
+       dayCount = 0;
+
+     } else if (compareDate(month1, day1, year1, month2, day2, year2) == 1) {
+       while (dateEquals(month1, day1, year1, month2, day2, year2) == false) {
+         day2++;
+         if (daysInMonth(month1, year1) < day2) {
+           day2 = 1;
+           month2++;
+           if (month2 > 12) {
+             month2 = 1;
+             year2++;
+           }
+         }
+         dayCount++;
+       }
+     } else if (compareDate(month1, day1, year1, month2, day2, year2) == -1) {
+       while (dateEquals(month1, day1, year1, month2, day2, year2) == false) {
+         day1++;
+         if (daysInMonth(month1, year1) < day1) {
+           month1++;
+           day1 = 1;
+           if (month1 > 12) {
+             month1 = 1;
+             year1++;
+           }
+         }
+         dayCount++;
+       }
+     } else if (compareDate(month1, day1, year1, month2, day2, year2) == 1) {
+       while (dateEquals(month1, day1, year1, month2, day2, year2) == false) {
+         day2++;
+         if (daysInMonth(month1, year1) < day2) {
+           day2 = 1;
+           month2++;
+           if (month2 > 12) {
+             month2 = 1;
+             year2++;
+           }
+         }
+         dayCount++;
+       }
+     }
+     return dayCount;
    }
-}
+ }
