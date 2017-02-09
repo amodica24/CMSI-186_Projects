@@ -232,5 +232,4 @@ public class StringStuffTester {
      try { System.out.println( StringStuff.reverse("ABCD1234")); }
      catch( Exception e ) { System.out.println ( false ); }
    }
-
 }
