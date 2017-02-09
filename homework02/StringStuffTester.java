@@ -18,6 +18,7 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-01-25  B.J. Johnson  Initial writing and release
  *  @version 2.0.0  2017-02-08  Anthony Modica First draft of code
+ *  @version 3.0.0  2017-02-08  Anthony Modica Second draft of code
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 public class StringStuffTester {
@@ -171,8 +172,8 @@ public class StringStuffTester {
      try { System.out.println( StringStuff.evensOnlyNoDupes("abba abba abba")); }
      catch( Exception e ) { System.out.println ( false ); }
 
-     System.out.print( "   Test for Blah blah blah: " );
-     try { System.out.println( StringStuff.evensOnlyNoDupes("Blah blah blah")); }
+     System.out.print( "   Test for blah blah blah: " );
+     try { System.out.println( StringStuff.evensOnlyNoDupes("blah blah blah")); }
      catch( Exception e ) { System.out.println ( false ); }
 
    }
