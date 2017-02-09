@@ -33,23 +33,23 @@ public class StringStuff {
    * @return  boolean which is true if there is a vowel, or false otherwise
    */
    public static boolean containsVowel( String s ) {
-       for(int i = 0; i < s.length(); i++) {
-         switch(s.charAt(i)) {
-           case 'A':
-           case 'E':
-           case 'I':
-           case 'O':
-           case 'U':
-           case 'a':
-           case 'e':
-           case 'i':
-           case 'o':
-           case 'u':
-            return true;
-           default: continue;
-         }
+     for(int i = 0; i < s.length(); i++) {
+       switch(s.charAt(i)) {
+         case 'A':
+         case 'E':
+         case 'I':
+         case 'O':
+         case 'U':
+         case 'a':
+         case 'e':
+         case 'i':
+         case 'o':
+         case 'u':
+         return true;
+         default: continue;
        }
-       return false;
+     }
+     return false;
    }
 
   /**
@@ -61,12 +61,12 @@ public class StringStuff {
    * @return  boolean which is true if this a palindrome, or false otherwise
    */
    public static boolean isPalindrome( String s ) {
-       for (int i = 0; i < s.length()/2; i++) {
-         if (s.charAt(i) == s.charAt(s.length() - i - 1)) {
-           return true;
-         }
+     for (int i = 0; i < s.length()/2; i++) {
+       if (s.charAt(i) == s.charAt(s.length() - i - 1)) {
+         return true;
        }
-       return false;
+     }
+     return false;
    }
 
   /**
@@ -79,16 +79,14 @@ public class StringStuff {
    */
 
    public static String evensOnly( String s ) {
-
      String evensAlphabet = "";
-
      for (int i = 0; i < s.length(); i++) {
-       if (s.charAt(i) % 2 != 1) {
-       evensAlphabet += s.charAt(i);
+       if (s.charAt(i) % 2 == 0) {
+         evensAlphabet += s.charAt(i);
+       }
      }
+     return evensAlphabet;
    }
-   return evensAlphabet;
- }
 
   /**
    * Method to return the characters in a string that correspond to the &quot;ODD&quot; index
@@ -100,13 +98,11 @@ public class StringStuff {
    */
    public static String oddsOnly( String s ) {
      String oddsAlphabet = "";
-
      for (int i = 0; i < s.length(); i++) {
        if (s.charAt(i) % 2 == 1) {
          oddsAlphabet += s.charAt(i);
        }
      }
-
      return oddsAlphabet;
    }
 
@@ -119,10 +115,11 @@ public class StringStuff {
    */
    public static String evensOnlyNoDupes( String s ) {
      String evensAlphabet = "";
-
      for (int i = 0; i < s.length(); i++) {
-       if (s.charAt(i) % 2 != 1) {
-         evensAlphabet += s.charAt(i);
+       if (s.charAt(i) % 2 == 0) {
+         if(!evensAlphabet.contains(Character.toString(s.charAt(i)))){
+           evensAlphabet = evensAlphabet.concat(Character.toString(s.charAt(i)));
+         }
        }
      }
      return evensAlphabet;
@@ -138,10 +135,14 @@ public class StringStuff {
    public static String oddsOnlyNoDupes( String s ) {
      String oddsAlphabet = "";
      for (int i = 1; i <= s.length() - 1; i += 2) {
-        oddsAlphabet += s.charAt(i);
+       if (s.charAt(i) % 2 == 1) {
+         if(!oddsAlphabet.contains(Character.toString(s.charAt(i)))){
+           oddsAlphabet = oddsAlphabet.concat(Character.toString(s.charAt(i)));
+         }
+       }
      }
      return oddsAlphabet;
-  }
+   }
 
   /**
    * Method to return the reverse of a string passed as an argument
@@ -150,9 +151,7 @@ public class StringStuff {
    * @return  String containing the reverse of the input string
    */
    public static String reverse( String s ) {
-
      String reversedString = "";
-
      for(int i = 0; i < s.length(); i++) {
        reversedString += s.charAt(s.length() - 1 - i);
      }
