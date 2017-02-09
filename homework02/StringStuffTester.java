@@ -28,6 +28,13 @@ public class StringStuffTester {
    * @param args String[] array containing command line parameters
    * @return void
    */
+public class StringStuffTester {
+
+  /**
+   * the main method which calls all of the test methods in the class
+   * @param args String[] array containing command line parameters
+   * @return void
+   */
    public static void main ( String [] args ) {
 
       test_containsVowel();      // fill in how many tests
@@ -43,6 +50,7 @@ public class StringStuffTester {
    * test method to test out the operation of the containsVowel method
    */
    public static void test_containsVowel() {
+
       System.out.println( " Five Tests For containsVowel():" );
 
       System.out.print( "   Test for Computer Science: " );
@@ -69,7 +77,9 @@ public class StringStuffTester {
   /**
    * test method to test out the operation of the isPalindrome method
    */
+
    public static void test_isPalindrome() {
+
       System.out.println( " Five Tests For isPalindrome():" );
 
       System.out.print( "   Test for racecar: " );
@@ -97,7 +107,9 @@ public class StringStuffTester {
   /**
    * test method to test out the operation of the evensOnly method
    */
+
    public static void test_evensOnly() {
+
      System.out.println( " Five Tests For evensOnly():" );
 
      System.out.print( "   Test for REHEARSAL: " );
