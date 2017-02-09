@@ -37,13 +37,13 @@ public class StringStuffTester {
    */
    public static void main ( String [] args ) {
 
-      test_containsVowel();      // fill in how many tests
-      test_isPalindrome();       // fill in how many tests
-      test_evensOnly();          // fill in how many tests
-      test_oddsOnly();           // fill in how many tests
-      test_evensOnlyNoDupes();   // fill in how many tests
-      test_oddsOnlyNoDupes();    // fill in how many tests
-      test_reverse();            // fill in how many tests
+      test_containsVowel();      // 5 tests
+      test_isPalindrome();       // 5 tests
+      test_evensOnly();          // 5 tests
+      test_oddsOnly();           // 5 tests
+      test_evensOnlyNoDupes();   // 5 tests
+      test_oddsOnlyNoDupes();    // 5 tests
+      test_reverse();            // 5 tests
    }
 
   /**
