@@ -14,7 +14,7 @@ public class StringFunctions {
   String input = new String ( "" );
 
     for( int i = 0; i < args.length; i++ ){
-      input = input.concat( args[i] );
+      input = input.concat( args[0] );
 
         System.out.println(StringStuff.containsVowel( input ));
 
