@@ -31,4 +31,4 @@ public class StringFunctions {
         System.out.println(StringStuff.reverse( input ));
       }
     }
-  }
+}
