@@ -140,3 +140,4 @@ public class DiceSet {
    */
    public static void main( String[] args ) {
    }
+}
