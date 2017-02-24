@@ -34,6 +34,7 @@
  *  @version 1.1.0  2017-02-17  B.J. Johnson  Filled in method code
  *  @version 1.2.0  2017-02-20  Anthony Modica  First draft of each test
  *  @version 1.3.0  2017-02-21  Anthony Modica  Second draft of each test
+ *  @version 1.3.0  2017-02-23  Anthony Modica  Third draft of each test
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 public class Die {
 
@@ -101,17 +102,22 @@ public class Die {
    * @return String representation of this Die
    */
    public static String toString( Die d ) {
-     String dieString = Integer.toString(d.sides);
-     return dieString;
+     return "[" + d.getValue() + "]";
   }
 
   /**
    * A little test main to check things out
    */
    public static void main( String[] args ) {
-      Die d = new Die( 4 );
+      Die d = new Die( 5 );
 
       System.out.println( "You rolled a " + d.roll() );
+      System.out.println( "You rolled a " + d.roll() );
+      System.out.println( "You rolled a " + d.roll() );
+      System.out.println( "You rolled a " + d.roll() );
+      System.out.println( "You rolled a " + d.roll() );
+      System.out.println( "You rolled a " + d.roll() );
+
       System.out.println( "Your dice has " + d.getValue() + " number of sides");
       System.out.println( "Your Die has " + d.toString() + " sides." + " Your last roll was a: " + d.getValue());
     }
