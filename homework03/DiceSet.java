@@ -16,7 +16,7 @@
  *                   public boolean isIdentical( DiceSet ds );        // Returns true iff this set is identical to the set ds
  *                   public static void main( String[] args );        // The built-in test program for this class
  *
- *  Notes         :  Stolen from Dr. Dorin pretty much verbatim, then modified to show some interesting
+ *  Notes         :  Stolen from Dr. Dorin pretty much verbadice4, then modified to show some interesting
  *                   things about Java, and to add this header block and some JavaDoc comments.
  *  Warnings      :  None
  *  Exceptions    :  IllegalArgumentException when the number of sides or pips is out of range
@@ -83,7 +83,7 @@ public class DiceSet {
    */
    public int rollIndividual( int dieIndex ) {
      if (dieIndex > dArray.length) {
-       throw new IllegalArgumentException("Error Index is out of range");
+       throw new IllegalArgumentException("Error, Index is out of range");
      }
      return dArray[dieIndex].roll();
   }
@@ -94,7 +94,7 @@ public class DiceSet {
    */
    public int getIndividual( int dieIndex ) {
      if (dieIndex > dArray.length) {
-       throw new IllegalArgumentException("Error Index is out of range");
+       throw new IllegalArgumentException("Error, Index is out of range");
      }
      return dArray[dieIndex].getValue();
   }
@@ -139,5 +139,42 @@ public class DiceSet {
    * A little test main to check things out
    */
    public static void main( String[] args ) {
+     DiceSet dice1 = new DiceSet (5,6);
+     DiceSet dice2 = new DiceSet (5,8);
+     DiceSet dice3 = new DiceSet (6,10);
+     DiceSet dice4 = new DiceSet (6,4);
+
+     dice1.roll();
+     System.out.println("dice1: " + dice1);
+     System.out.println("Sum of dice1 set: " + dice1.sum());
+     dice1.rollIndividual(0);
+     System.out.println("Rolling individual dice1.. " + dice1);
+     System.out.println("Identical values of dice1 and dice2 ? " + dice1.isIdentical(dice2));
+     System.out.println( "String of dice1:" + dice1.toString());
+
+     
+     dice2.roll();
+     System.out.println("dice2: " + dice2 );
+     System.out.println("Sum of dice set: " + dice2.sum());
+     dice2.rollIndividual(1);
+     System.out.println("Rolling individual dice.. " + dice2);
+     System.out.println("Identical values of dice2 and dice3 ? " + dice2.isIdentical(dice2));
+     System.out.println( "String of dice2:" + dice2.toString());
+
+     dice3.roll();
+     System.out.println("dice3: " + dice3);
+     System.out.println("Sum of dice set: " + dice3.sum());
+     dice3.rollIndividual(4);
+     System.out.println("Rolling individual dice.. " + dice3);
+     System.out.println("Identical values of dice3 and dice4 ? " + dice3.isIdentical(dice4));
+     System.out.println( "String of dice3:" + dice3.toString());
+
+     dice4.roll();
+     System.out.println("dice4: " + dice4);
+     System.out.println("Sum of dice set: " + dice4.sum());
+     dice4.rollIndividual(2);
+     System.out.println("Rolling individual dice.. " + dice4);
+     System.out.println("Identical values of dice4 and dice2 ? " + dice4.isIdentical(dice2));
+     System.out.println( "String of dice4:" + dice4.toString());
    }
-}
+ }
