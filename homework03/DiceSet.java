@@ -28,7 +28,7 @@
  *  @version 1.0.0  2017-02-09  B.J. Johnson  Initial writing and release
  *  @version 1.0.1  2017-02-23  Anthony Modica  First Draft
  *  @version 1.1.0  2017-02-23  Anthony Modica  Second Draft
- 
+
 
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 public class DiceSet {
@@ -183,3 +183,4 @@ public class DiceSet {
      System.out.println( "String of dice4:" + dice4.toString());
    }
  }
+
