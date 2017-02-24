@@ -27,6 +27,8 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-02-09  B.J. Johnson  Initial writing and release
  *  @version 1.0.1  2017-02-23  Anthony Modica  First Draft
+ *  @version 1.1.0  2017-02-23  Anthony Modica  Second Draft
+ 
 
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 public class DiceSet {
@@ -73,8 +75,11 @@ public class DiceSet {
    *  the values of the dice in the set
    */
    public void roll() {
+     int sum = 0;
+     for ( int i = 0; i < dArray.length; i++ ) {
+       dArray[i].roll();
+     }
    }
-
   /**
    * Randomly rolls a single die of the dice in this set indexed by 'dieIndex'
    * @param  dieIndex int of which die to roll
@@ -145,6 +150,10 @@ public class DiceSet {
      DiceSet dice4 = new DiceSet (6,4);
 
      dice1.roll();
+     dice2.roll();
+     dice3.roll();
+     dice4.roll();
+
      System.out.println("dice1: " + dice1);
      System.out.println("Sum of dice1 set: " + dice1.sum());
      dice1.rollIndividual(0);
@@ -152,8 +161,6 @@ public class DiceSet {
      System.out.println("Identical values of dice1 and dice2 ? " + dice1.isIdentical(dice2));
      System.out.println( "String of dice1:" + dice1.toString());
 
-     
-     dice2.roll();
      System.out.println("dice2: " + dice2 );
      System.out.println("Sum of dice set: " + dice2.sum());
      dice2.rollIndividual(1);
@@ -161,7 +168,6 @@ public class DiceSet {
      System.out.println("Identical values of dice2 and dice3 ? " + dice2.isIdentical(dice2));
      System.out.println( "String of dice2:" + dice2.toString());
 
-     dice3.roll();
      System.out.println("dice3: " + dice3);
      System.out.println("Sum of dice set: " + dice3.sum());
      dice3.rollIndividual(4);
@@ -169,7 +175,6 @@ public class DiceSet {
      System.out.println("Identical values of dice3 and dice4 ? " + dice3.isIdentical(dice4));
      System.out.println( "String of dice3:" + dice3.toString());
 
-     dice4.roll();
      System.out.println("dice4: " + dice4);
      System.out.println("Sum of dice set: " + dice4.sum());
      dice4.rollIndividual(2);
