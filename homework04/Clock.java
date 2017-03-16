@@ -16,8 +16,10 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-02-28  B.J. Johnson  Initial writing and release
  *  @version 2.0.0  2017-03-15  Anthony Modica First draft of code
- *  @version 2.1.0  2017-03-15  Anthony Modica Second draft of code
- *  @version 2.2.0  2017-03-15  Anthony Modica Third draft of code
+ *  @version 2.2.0  2017-03-15  Anthony Modica Second draft of code
+ *  @version 2.3.0  2017-03-15  Anthony Modica Third draft of code
+ *  @version 2.4.0  2017-03-15  Anthony Modica Fourth draft of code
+
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
  public class Clock {
@@ -35,6 +37,8 @@
     private int minutes;
     private double seconds;
     private double sumSeconds;
+    private double hourHandAngle;
+    private double minuteHandAngle;
 
   /**
    *  Constructor goes here
@@ -43,6 +47,8 @@
      this.hour = 0;
      this.minutes = 0;
      this.seconds = 0.0;
+     this.hourHandAngle = 0;
+     this.minuteHandAngle = 0;
    }
 
   /**
