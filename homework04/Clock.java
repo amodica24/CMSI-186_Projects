@@ -16,7 +16,7 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-02-28  B.J. Johnson  Initial writing and release
  *  @version 2.0.0  2017-03-15  Anthony Modica First draft of code
- 
+
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
  public class Clock {
@@ -85,7 +85,7 @@
    *  @return  double-precision value of the argument
    *  @throws  NumberFormatException
    */
-   public double validateAngleArg( String argValue ) throws NumberFormatException {
+   public double validateAngleArg( String argValue ) {
      double angleArg = Double.parseDouble( argValue );
 
      if ( argValue.length() == 0 ) {
@@ -93,10 +93,10 @@
        return MAXIMUM_DEGREE_VALUE;
      }
 
-     if ( angleArg > 0 && angleArg < MAXIMUM_DEGREE_VALUE ) {
-       return angleArg;
+     if ( angleArg < 0 ||  angleArg > 360 ) {
+       return INVALID_ARGUMENT_VALUE;
      }
-     return INVALID_ARGUMENT_VALUE;
+     return angleArg;
    }
 
   /**
