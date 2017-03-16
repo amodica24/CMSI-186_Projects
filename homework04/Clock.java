@@ -16,7 +16,8 @@
  *           -----  ----------  ------------  -----------------------------------------------------------
  *  @version 1.0.0  2017-02-28  B.J. Johnson  Initial writing and release
  *  @version 2.0.0  2017-03-15  Anthony Modica First draft of code
-
+ *  @version 2.1.0  2017-03-15  Anthony Modica Second draft of code
+ *  @version 2.2.0  2017-03-15  Anthony Modica Third draft of code
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
  public class Clock {
@@ -33,35 +34,15 @@
     private int hour;
     private int minutes;
     private double seconds;
-    private double totalSeconds;
+    private double sumSeconds;
 
   /**
    *  Constructor goes here
    */
-   public Clock( int HOUR, int MINUTE, double SECONDS) {
-
-      if ( HOUR > 11 || HOUR <= INVALID_ARGUMENT_VALUE || MINUTE > 59 || MINUTE <= INVALID_ARGUMENT_VALUE || SECONDS > MAXIMUM_TIME_SLICE_IN_SECONDS || SECONDS <= INVALID_ARGUMENT_VALUE ) {
-        throw new IllegalArgumentException("\n Invalid values");
-      } else {
-        this.hour = HOUR;
-        this.minutes = MINUTE;
-        this.seconds = SECONDS;
-
-        if ( this.hour < 11 && this.minutes > 59) {
-          int oneHour = this.minutes / 60;
-          this.minutes = this.minutes % 60;
-          this.hour += oneHour;
-
-        if ( this.seconds > 60.0 ) {
-          double roundSeconds = Math.round(this.seconds);
-          int oneMinute = (int)roundSeconds / 60;
-          this.seconds %= 60;
-          this.minutes += oneMinute;
-
-          }
-        }
-      }
-      this.totalSeconds = 0.0;
+   public Clock() {
+     this.hour = 0;
+     this.minutes = 0;
+     this.seconds = 0.0;
    }
 
   /**
@@ -72,12 +53,21 @@
    */
    public double tick(double timeSlices) {
      if (timeSlices >= DEFAULT_TIME_SLICE_IN_SECONDS ) {
-       throw new IllegalArgumentException ("\n Invalid value");
+       throw new IllegalArgumentException ("\n Invalid time value");
      } else {
-       totalSeconds += timeSlices;
+       sumSeconds += timeSlices;
      }
-     return totalSeconds;
-   }
+     if (minutes >= 60) {
+        this.hour += 1;
+        this.minutes -= this.minutes;
+     }
+     this.seconds %= this.seconds;
+
+     if (hour == 12) {
+        this.hour = 0;
+     }
+     return sumSeconds;
+  }
 
   /**
    *  Method to validate the angle argument
@@ -93,8 +83,8 @@
        return MAXIMUM_DEGREE_VALUE;
      }
 
-     if ( angleArg < 0 ||  angleArg > 360 ) {
-       return INVALID_ARGUMENT_VALUE;
+     if ( angleArg < 0 || angleArg > MAXIMUM_DEGREE_VALUE ) {
+       throw new IllegalArgumentException("Invalid angle value");
      }
      return angleArg;
    }
@@ -129,7 +119,14 @@
    *  @return double-precision value of the hour hand location
    */
    public double getHourHandAngle() {
-     return this.hour;
+     double hourHandAngle = sumSeconds * HOUR_HAND_DEGREES_PER_SECOND;
+     if (hourHandAngle > 360) {
+       hourHandAngle %= 360;
+     }
+     if ( hourHandAngle > 180 ) {
+       hourHandAngle = 360 - hourHandAngle;
+     }
+     return hourHandAngle;
    }
 
   /**
@@ -137,7 +134,14 @@
    *  @return double-precision value of the minute hand location
    */
    public double getMinuteHandAngle() {
-     return this.minutes;
+     double minuteHandAngle = sumSeconds * MINUTE_HAND_DEGREES_PER_SECOND;
+     if (minuteHandAngle > 360) {
+       minuteHandAngle %= 360;
+     }
+     if ( minuteHandAngle > 180 ) {
+       minuteHandAngle = 360 - minuteHandAngle;
+     }
+     return minuteHandAngle;
    }
 
   /**
@@ -145,20 +149,17 @@
    *  @return double-precision value of the angle between the two hands
    */
    public double getHandAngle() {
-     double angleBetween = Math.abs(getMinuteHandAngle() - getHourHandAngle());
-     if (angleBetween > 180 ) {
-       return 360 - angleBetween;
-     }
-     return angleBetween;
-   }
+     double angleBetween  = Math.abs(hourHandAngle - minuteHandAngle);
+     return angleBetween ;
+  }
 
   /**
    *  Method to fetch the total number of seconds
    *   we can use this to tell when 12 hours have elapsed
    *  @return double-precision value the total seconds private variable
    */
-   public double getTotalSeconds() {
-     return totalSeconds;
+   public double getsumSeconds() {
+     return sumSeconds;
    }
 
   /**
@@ -166,7 +167,7 @@
    *  @return String value of the current clock
    */
    public String toString() {
-     return this.hour + " : " + this.minutes + " : " + this.totalSeconds;
+     return this.hour + " : " + this.minutes + " : " + this.sumSeconds;
    }
 
   /**
@@ -182,7 +183,7 @@
       System.out.println( "\nCLOCK CLASS TESTER PROGRAM\n" +
                           "--------------------------\n" );
       System.out.println( "  Creating a new clock: " );
-      Clock clock = new Clock(60, 60, 60 );
+      Clock clock = new Clock();
       System.out.println( "    New clock created: " + clock.toString() );
       System.out.println( "    Testing validateAngleArg()....");
       System.out.print( "      sending '  0 degrees', expecting double value   0.0" );
