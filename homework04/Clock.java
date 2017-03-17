@@ -110,13 +110,8 @@
    public double validateTimeSliceArg( String argValue ) {
      double timeArgValue = Double.parseDouble( argValue );
 
-     if ( argValue.length() == 0 ) {
-       timeArgValue = DEFAULT_TIME_SLICE_IN_SECONDS;
-       return DEFAULT_TIME_SLICE_IN_SECONDS;
-     }
-
-     if ( timeArgValue < 0 && timeArgValue > MAXIMUM_DEGREE_VALUE ) {
-       return INVALID_ARGUMENT_VALUE;
+     if (timeArgValue > MAXIMUM_TIME_SLICE_IN_SECONDS || timeArgValue < 0) {
+        throw new IllegalArgumentException("Invalid time slice");
      }
      return timeArgValue;
    }
@@ -126,14 +121,7 @@
    *  @return double-precision value of the hour hand location
    */
    public double getHourHandAngle() {
-     double hourHandAngle = sumSeconds * HOUR_HAND_DEGREES_PER_SECOND;
-     if (hourHandAngle > 360) {
-       hourHandAngle %= 360;
-     }
-     if ( hourHandAngle > 180 ) {
-       hourHandAngle = 360 - hourHandAngle;
-     }
-     return hourHandAngle;
+     return this.hour;
    }
 
   /**
@@ -156,6 +144,7 @@
    *  @return double-precision value of the angle between the two hands
    */
    public double getHandAngle() {
+     double hourHandAngle = sumSeconds * HOUR_HAND_DEGREES_PER_SECOND;
      double angleBetween = Math.abs(hourHandAngle - minuteHandAngle);
      return angleBetween;
   }
@@ -261,7 +250,7 @@
       catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
 
       System.out.print( "Sending ' 1800.0 seconds ', expecting double value  1800.0  " );
-      try { System.out.println( (1800.0 == clock1.validateTimeSliceArg( "1800.0" )) ? " - got 1800" : " - no joy" ); }
+      try { System.out.println( (1800.0 == clock1.validateTimeSliceArg( "1800.0" )) ? " - got 1800.0" : " - no joy" ); }
       catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
 
       System.out.print( "Sending ' 1800.1 seconds ', expecting double value  1800.1  " );
@@ -270,7 +259,7 @@
 
       Clock clock2 = new Clock();
       clock2.tick( 60 );
-      System.out.println( "\n\n    Testing new clock with tick( 60 )....." );
+      System.out.println( "\n    Testing new clock with tick( 60 )....." );
       System.out.print( "      Testing getHourHandAngle()..... expecting 0.5" );
       System.out.println( ( 0.5 == clock2.getHourHandAngle() ? " - got 0.5" : " - no joy") );
       System.out.print( "      Testing getMinuteHandAngle()..... expecting 6.0" );
@@ -280,7 +269,7 @@
 
       Clock clock3 = new Clock();
       clock3.tick( 120 );
-      System.out.println( "\n\n    Testing new clock with tick( 120 )....." );
+      System.out.println( "\n    Testing new clock with tick( 120 )....." );
       System.out.print( "      Testing getHourHandAngle()..... expecting 1.0" );
       System.out.println( ( 1.0 == clock3.getHourHandAngle() ? " - got 1.0" : " - no joy") );
       System.out.print( "      Testing getMinuteHandAngle()..... expecting 12.0" );
