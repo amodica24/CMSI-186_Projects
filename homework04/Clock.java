@@ -188,74 +188,6 @@
       try { System.out.println( (0.0 == clock1.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
       catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
 
-      /**
-       *  Checks validity of the Angle Arg
-       */
-
-      System.out.print( "Sending '0 degrees', expecting double value 0.0 " );
-      try { System.out.println( (0.0 == clock1.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending' 360 degrees', expecting double value 360.0  " );
-      try { System.out.println( (360.0 == clock1.validateAngleArg( "360.0" )) ? " - got 360.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending '362 degrees', expecting double value 362.0  " );
-      try { System.out.println( (362.0 == clock1.validateAngleArg( "362.0" )) ? " - got 362.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending '359 degrees', expecting double value 359.0  " );
-      try { System.out.println( (359.0 == clock1.validateAngleArg( "359.0" )) ? " - got 359.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending '200 degrees', expecting double value 200.0  " );
-      try { System.out.println( (200.0 == clock1.validateAngleArg( "200.0" )) ? " - got 200.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending '20 degrees', expecting double value 20.0  " );
-      try { System.out.println( (20.0 == clock1.validateAngleArg( "20.0" )) ? " - got 20.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending '  -1 degrees  ', expecting double value  -1.0  " );
-      try { System.out.println( (-1.0 == clock1.validateAngleArg( "-1.0" )) ? " - got -1.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending '  180 degrees  ', expecting double value  180.0  " );
-      try { System.out.println( (180.0 == clock1.validateAngleArg( "180.0" )) ? " - got 180.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending '  -10.5 degrees  ', expecting double value  -10.5  " );
-      try { System.out.println( (-10.5 == clock1.validateAngleArg( "-10.5" )) ? " - got -10.5" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      /**
-       *  Checks validity of the TimeSlice Arg
-       */
-
-      System.out.println( "\n    Testing validateTimeSliceArg()....");
-      System.out.print( "Sending ' 0.0 seconds ', expecting double value 0.0  " );
-      try { System.out.println( (0.0 == clock1.validateTimeSliceArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending ' -1.0 seconds ', expecting double value  -1.0  " );
-      try { System.out.println( (-1.0 == clock1.validateTimeSliceArg( "-1.0" )) ? " - got -1.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending ' 10.0 seconds ', expecting double value  10.0  " );
-      try { System.out.println( (10.0 == clock1.validateTimeSliceArg( "10.0" )) ? " - got 10.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending ' 100.975 seconds ', expecting double value  100.975  " );
-      try { System.out.println( (100.975 == clock1.validateTimeSliceArg( "100.975" )) ? " - got 100.975" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending ' 1800.0 seconds ', expecting double value  1800.0  " );
-      try { System.out.println( (1800.0 == clock1.validateTimeSliceArg( "1800.0" )) ? " - got 1800.0" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
-
-      System.out.print( "Sending ' 1800.1 seconds ', expecting double value  1800.1  " );
-      try { System.out.println( ( 1800.1 == clock1.validateTimeSliceArg( "1800.1" )) ? " - got 1800.1" : " - no joy" ); }
-      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
 
       Clock clock2 = new Clock();
       clock2.tick( 60 );
@@ -277,5 +209,73 @@
       System.out.print( "      Testing getHandAngle()..... expecting 11.0 degrees" );
       System.out.println( ( 11.0 == clock3.getHandAngle() ? " - got 11.0" : " - no joy") );
 
+      /**
+       *  Checks validity of the Angle Arg
+       */
+
+      System.out.print( "    Sending '0 degrees', expecting double value 0.0 " );
+      try { System.out.println( (0.0 == clock1.validateAngleArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending' 360 degrees', expecting double value 360.0  " );
+      try { System.out.println( (360.0 == clock1.validateAngleArg( "360.0" )) ? " - got 360.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending '362 degrees', expecting double value 362.0  " );
+      try { System.out.println( (362.0 == clock1.validateAngleArg( "362.0" )) ? " - got 362.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending '359 degrees', expecting double value 359.0  " );
+      try { System.out.println( (359.0 == clock1.validateAngleArg( "359.0" )) ? " - got 359.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending '200 degrees', expecting double value 200.0  " );
+      try { System.out.println( (200.0 == clock1.validateAngleArg( "200.0" )) ? " - got 200.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending '20 degrees', expecting double value 20.0  " );
+      try { System.out.println( (20.0 == clock1.validateAngleArg( "20.0" )) ? " - got 20.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending '  -1 degrees  ', expecting double value  -1.0  " );
+      try { System.out.println( (-1.0 == clock1.validateAngleArg( "-1.0" )) ? " - got -1.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending '  180 degrees  ', expecting double value  180.0  " );
+      try { System.out.println( (180.0 == clock1.validateAngleArg( "180.0" )) ? " - got 180.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending '  -10.5 degrees  ', expecting double value  -10.5  " );
+      try { System.out.println( (-10.5 == clock1.validateAngleArg( "-10.5" )) ? " - got -10.5" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      /**
+       *  Checks validity of the TimeSlice Arg
+       */
+
+      System.out.println( "\n    Testing validateTimeSliceArg()....");
+      System.out.print( "    Sending ' 0.0 seconds ', expecting double value 0.0  " );
+      try { System.out.println( (0.0 == clock1.validateTimeSliceArg( "0.0" )) ? " - got 0.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending ' -1.0 seconds ', expecting double value  -1.0  " );
+      try { System.out.println( (-1.0 == clock1.validateTimeSliceArg( "-1.0" )) ? " - got -1.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending ' 10.0 seconds ', expecting double value  10.0  " );
+      try { System.out.println( (10.0 == clock1.validateTimeSliceArg( "10.0" )) ? " - got 10.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending ' 100.975 seconds ', expecting double value  100.975  " );
+      try { System.out.println( (100.975 == clock1.validateTimeSliceArg( "100.975" )) ? " - got 100.975" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending ' 1800.0 seconds ', expecting double value  1800.0  " );
+      try { System.out.println( (1800.0 == clock1.validateTimeSliceArg( "1800.0" )) ? " - got 1800.0" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
+
+      System.out.print( "    Sending ' 1800.1 seconds ', expecting double value  1800.1  " );
+      try { System.out.println( ( 1800.1 == clock1.validateTimeSliceArg( "1800.1" )) ? " - got 1800.1" : " - no joy" ); }
+      catch( Exception e ) { System.out.println ( " - Exception thrown: " + e.toString() ); }
     }
   }
