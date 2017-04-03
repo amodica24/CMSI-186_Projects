@@ -17,7 +17,6 @@
  *  @version 2.1.0  2017-03-27  Anthony Modica     Second Draft
  *  @version 2.2.0  2017-03-25  Anthony Modica     Third Draft
  *  @version 2.3.0  2017-04-02  Anthony Modica     Fourth Draft
- *  @version 2.3.0  2017-04-03  Anthony Modica     Fifth Draft
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
  public class Ball {
@@ -53,7 +52,6 @@
     */
 
     public double getXVelocity() {
-      Timer timer = new Timer(1);
       if (xVelocity < 0) {
         xVelocity = xVelocity - (xVelocity * 0.01);
       } else {
@@ -63,7 +61,6 @@
     }
 
     public double getYVelocity() {
-      Timer timer = new Timer(1);
       if (yVelocity > 0) {
         yVelocity = yVelocity - (yVelocity * 0.01);
       } else {
@@ -109,9 +106,9 @@
    */
 
    public static void main( String args[] ) {
-     Timer timer1 = new Timer(10);
-     Timer timer2 = new Timer(5);
-     Timer timer3 = new Timer(20);
+     Timer timer1 = new Timer();
+     Timer timer2 = new Timer();
+     Timer timer3 = new Timer();
 
      System.out.println( "         Testing ball position at (-300, -300) velocity of (-10, 20) : " );
      Ball ball = new Ball(-300, -300, -10, 20 );
