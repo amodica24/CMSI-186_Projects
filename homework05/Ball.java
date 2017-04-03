@@ -77,7 +77,7 @@
 
     public double[] getPosition() {
       positionArray[0] = xPosition + getXVelocity();
-  		positionArray[1] = yPosition + getYVelocity();
+  		  positionArray[1] = yPosition + getYVelocity();
       return positionArray;
     }
 
