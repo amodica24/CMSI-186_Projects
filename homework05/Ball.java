@@ -33,6 +33,10 @@
     private double yPosition;
     private double xVelocity;
     private double yVelocity;
+    private double xFinal;
+    private double yFinal;
+
+
 
     private double[] positionArray = new double[2];
     /**
@@ -52,20 +56,12 @@
     */
 
     public double getXVelocity() {
-      if (xVelocity < 0) {
-        xVelocity = xVelocity - (xVelocity * 0.01);
-      } else {
-        xVelocity = xVelocity + (xVelocity * 0.01);
-      }
+      xVelocity = xVelocity - (xVelocity * 0.01);
       return xVelocity;
     }
 
     public double getYVelocity() {
-      if (yVelocity > 0) {
-        yVelocity = yVelocity - (yVelocity * 0.01);
-      } else {
-        yVelocity = yVelocity + (yVelocity * 0.01);
-      }
+      yVelocity = yVelocity - (yVelocity * 0.01);
       return yVelocity;
     }
 
@@ -144,8 +140,8 @@
      ball2.getYVelocity();
      System.out.println( "VELOCITY: " + ball2.velocityToString() );
 
-     System.out.println( "         Testing ball position at (25, 10) velocity of (-5, 10) : " );
-     Ball ball3 = new Ball(25, 10, -5, 10 );
+     System.out.println( "         Testing ball position at (25, 10) velocity of (-5, -10) : " );
+     Ball ball3 = new Ball(25, 10, -5, -10 );
      System.out.println( "TIME: " + timer3.timeToString() );
      ball3.getPosition();
      System.out.println("POSITION: " + ball3.positionToString() );
