@@ -42,14 +42,14 @@
    */
 
    public String timeToString() {
-     double hours = Math.floor( totalSeconds / 3600.0 );
+     double hours = totalSeconds / 3600.0;
      double timeJunque = totalSeconds % 3600;
-     double minutes = Math.floor( timeJunque / 60.0 );
+     double minutes = timeJunque / 60.0;
      double seconds = timeJunque % 60;
 
      String hourString = Integer.toString( (int) hours );
      String minuteString = Integer.toString( (int) minutes );
-     String secondString = Double.toString( seconds );
+     String secondString = Integer.toString( (int)seconds );
 
      return hourString + ":" + minuteString + ":" + secondString;
    }
