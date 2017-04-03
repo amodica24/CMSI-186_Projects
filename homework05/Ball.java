@@ -99,7 +99,7 @@
 
      System.out.println( "         Testing ball position at (300, 300) velocity of (-1, -2) : " );
      Ball ball = new Ball(300, 300, -1, -2 );
-     System.out.println( "TIME: " + timer1.toString() );
+     System.out.println( "TIME: " + timer1.timeToString() );
      ball.getPosition();
      System.out.println("POSITION: " + ball.positionToString() );
      ball.getXVelocity();
@@ -107,7 +107,7 @@
      System.out.println("VELOCITY: " + ball.velocityToString() );
 
      timer1.tick();
-     System.out.println( "TIME: " + timer1.toString() );
+     System.out.println( "TIME: " + timer1.timeToString() );
      ball.getPosition();
      System.out.println( "POSITION: " + ball.positionToString() );
      ball.getXVelocity();
@@ -116,7 +116,7 @@
 
      System.out.println( "         Testing ball position at (0, 0) velocity of (10, 2) : " );
      Ball ball2 = new Ball(0, 0, 10, 2 );
-     System.out.println( "TIME: " + timer2.toString() );
+     System.out.println( "TIME: " + timer2.timeToString() );
      ball2.getPosition();
      System.out.println("POSITION: " + ball2.positionToString() );
      ball2.getXVelocity();
@@ -124,7 +124,7 @@
      System.out.println("VELOCITY: " + ball2.velocityToString() );
 
      timer2.tick();
-     System.out.println( "TIME: " + timer2.toString() );
+     System.out.println( "TIME: " + timer2.timeToString() );
      ball2.getPosition();
      System.out.println( "POSITION: " + ball2.positionToString() );
      ball2.getXVelocity();
@@ -133,7 +133,7 @@
 
      System.out.println( "         Testing ball position at (25, 10) velocity of (-5, 10) : " );
      Ball ball3 = new Ball(25, 10, -5, 10 );
-     System.out.println( "TIME: " + timer3.toString() );
+     System.out.println( "TIME: " + timer3.timeToString() );
      ball3.getPosition();
      System.out.println("POSITION: " + ball3.positionToString() );
      ball3.getXVelocity();
@@ -141,7 +141,7 @@
      System.out.println("VELOCITY: " + ball3.velocityToString() );
 
      timer3.tick();
-     System.out.println( "TIME: " + timer3.toString() );
+     System.out.println( "TIME: " + timer3.timeToString() );
      ball3.getPosition();
      System.out.println( "POSITION: " + ball3.positionToString() );
      ball3.getXVelocity();
