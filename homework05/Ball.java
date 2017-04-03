@@ -17,6 +17,7 @@
  *  @version 2.1.0  2017-03-27  Anthony Modica     Second Draft
  *  @version 2.2.0  2017-03-25  Anthony Modica     Third Draft
  *  @version 2.3.0  2017-04-02  Anthony Modica     Fourth Draft
+ *  @version 2.3.0  2017-04-03  Anthony Modica     Fifth Draft
  * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
  public class Ball {
@@ -24,7 +25,6 @@
    /**
     *   Class field definitions
     */
-    private static final double BALL_RADIUS = 4.45;
     private static final double BALL_WEIGHT = 1.0;
     private static final double DEFAULT_TIME_SLICE_SECONDS = 1.0;
 
@@ -64,7 +64,7 @@
 
     public double getYVelocity() {
       Timer timer = new Timer(1);
-      if (yVelocity < 0) {
+      if (yVelocity > 0) {
         yVelocity = yVelocity - (yVelocity * 0.01);
       } else {
         yVelocity = yVelocity + (yVelocity * 0.01);
@@ -72,22 +72,30 @@
       return yVelocity;
     }
 
-    public double[] getPosition(){
+    public double getXPosition(){
+      double xFinal = xPosition + getXVelocity();
+      return xFinal;
+    }
+
+    public double getYPosition(){
+      double yFinal = yPosition + getYVelocity();
+      return yFinal;
+    }
+
+    public double[] getPosition() {
       positionArray[0] = xPosition + getXVelocity();
   		positionArray[1] = yPosition + getYVelocity();
-  		// index 0 is x position and index 1 is y position
       return positionArray;
     }
 
-
-   /**
+    /**
 
     *   Method to return a String representation of this position
     *   @return String value of the current position
     */
 
     public String positionToString() {
-      return "(" + positionArray[0] + "," + positionArray[1] + ")";
+      return "(" + getXPosition() + "," + getYPosition() + ")";
     }
 
     public String velocityToString() {
