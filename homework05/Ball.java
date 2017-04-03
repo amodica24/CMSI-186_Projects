@@ -54,13 +54,21 @@
 
     public double getXVelocity() {
       Timer timer = new Timer(1);
-      xVelocity = xVelocity - (xVelocity * 0.01);
+      if (xVelocity < 0) {
+        xVelocity = xVelocity - (xVelocity * 0.01);
+      } else {
+        xVelocity = xVelocity + (xVelocity * 0.01);
+      }
       return xVelocity;
     }
 
     public double getYVelocity() {
       Timer timer = new Timer(1);
-      yVelocity = yVelocity - (yVelocity * 0.01);
+      if (yVelocity < 0) {
+        yVelocity = yVelocity - (yVelocity * 0.01);
+      } else {
+        yVelocity = yVelocity + (yVelocity * 0.01);
+      }
       return yVelocity;
     }
 
@@ -97,8 +105,8 @@
      Timer timer2 = new Timer(5);
      Timer timer3 = new Timer(20);
 
-     System.out.println( "         Testing ball position at (300, 300) velocity of (-1, -2) : " );
-     Ball ball = new Ball(300, 300, -1, -2 );
+     System.out.println( "         Testing ball position at (-300, -300) velocity of (-10, 20) : " );
+     Ball ball = new Ball(-300, -300, -10, 20 );
      System.out.println( "TIME: " + timer1.timeToString() );
      ball.getPosition();
      System.out.println("POSITION: " + ball.positionToString() );
