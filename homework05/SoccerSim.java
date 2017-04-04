@@ -37,6 +37,18 @@
   public static final double DEFAULT_X_POLE = 50;
   public static final double DEFAULT_Y_POLE = -10;
 
+  public static Ball[] handleArguments(String[] args) {
+    Ball[] ballArray = new Ball[(int) args.length/4 ];
+    for (int i = 0; i <= ballArray.length - 1 ; i++) {
+      double xPos = Double.parseDouble(args[(i*4)]);
+      double yPos = Double.parseDouble(args[(i*4)+1]);
+      double xVel = Double.parseDouble(args[(i*4)+2]);
+      double yVel = Double.parseDouble(args[(i*4)+3]);
+      ballArray[i] = new Ball(xPos,yPos,xVel,yVel);
+    }
+    return ballArray;
+  }
+
   public SoccerSim(Ball[] ballArray) {
     numBalls = 0;
     timeSlice = 0;
@@ -79,30 +91,18 @@
     return DEFAULT_Y_POLE;
   }
 
-  public static Ball[] handleArguments(String[] args) {
-    Ball[] ballArray = new Ball[(int) args.length/4 ];
-    for (int i = 0; i <= ballArray.length - 1 ; i++) {
-      double xPos = Double.parseDouble(args[(i*4)]);
-      double yPos = Double.parseDouble(args[(i*4)+1]);
-      double xVel = Double.parseDouble(args[(i*4)+2]);
-      double yVel = Double.parseDouble(args[(i*4)+3]);
-      ballArray[i] = new Ball(xPos,yPos,xVel,yVel);
-    }
-    return ballArray;
-  }
-
   public static void main(String[] args) {
      if (args.length % 4 == 1 && args.length >= 5) {
         SoccerSim soccer = new SoccerSim(handleArguments(args));
         for (int i = 0; i <= soccer.ballArray.length - 2; i++) {
           for (int j = i + 1; j <= soccer.ballArray.length - 1; j++) {
             double distance = Math.sqrt( (Math.pow(soccer.ballArray[j].getXPosition() - soccer.ballArray[i].getXPosition(),2)) + (Math.pow(soccer.ballArray[j].getYPosition() - soccer.ballArray[i].getYPosition(),2)))/2;
-            if (distance == 8.9)
-            System.out.println("COLLISION BETWEEN TWO BALLS");
-            return;
-            double distanceToPole = Math.sqrt( (Math.pow(soccer.poleX() - soccer.ballArray[i].getXPosition(),2)) + (Math.pow(soccer.poleY() - soccer.ballArray[i].getYPosition(),2)));
-            if (distanceToPole == 4.45) {
-              System.out.println("cOLLISION BETWEEN POLE AND BALL");
+            if (distance == 8.9) {
+            System.out.println("COLLISION BETWEEN TWO BALLS");  
+            }
+            double poleDist = Math.sqrt( (Math.pow(soccer.poleX() - soccer.ballArray[i].getXPosition(),2)) + (Math.pow(soccer.poleY() - soccer.ballArray[i].getYPosition(),2)));
+            if (poleDist == 4.45) {
+              System.out.println("COLLISION BETWEEN POLE AND BALL");
             }
           }
         }
