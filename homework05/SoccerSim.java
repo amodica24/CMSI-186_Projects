@@ -1,6 +1,6 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  SoccerSim.java
- *  Purpose       :  Provides a clasoccerSim defining methods for the Ball clasoccerSim
+ *  Purpose       :  Provides a SoccerSim defining methods for the SoccerSim class
  *  @author       :  Anthony Modica
  *  Date written  :  2017-3-25
  *  Description   :
