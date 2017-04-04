@@ -1,6 +1,6 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  *  File name     :  SoccerSim.java
- *  Purpose       :  Provides a SoccerSim defining methods for the SoccerSim class
+  *  Purpose       :  Provides a SoccerSim defining methods for the SoccerSim class
  *  @author       :  Anthony Modica
  *  Date written  :  2017-3-25
  *  Description   :
@@ -49,7 +49,7 @@
     return ballArray;
   }
 
-  public SoccerSim(Ball[] ballArray) {
+  public SoccerSim() {
     numBalls = 0;
     timeSlice = 0;
     ballArray = null;
@@ -91,21 +91,44 @@
     return DEFAULT_Y_POLE;
   }
 
-  public static void main(String[] args) {
-     if (args.length % 4 == 1 && args.length >= 5) {
-        SoccerSim soccer = new SoccerSim(handleArguments(args));
-        for (int i = 0; i <= soccer.ballArray.length - 2; i++) {
-          for (int j = i + 1; j <= soccer.ballArray.length - 1; j++) {
-            double distance = Math.sqrt( (Math.pow(soccer.ballArray[j].getXPosition() - soccer.ballArray[i].getXPosition(),2)) + (Math.pow(soccer.ballArray[j].getYPosition() - soccer.ballArray[i].getYPosition(),2)))/2;
-            if (distance == 8.9) {
-            System.out.println("COLLISION BETWEEN TWO BALLS");  
-            }
-            double poleDist = Math.sqrt( (Math.pow(soccer.poleX() - soccer.ballArray[i].getXPosition(),2)) + (Math.pow(soccer.poleY() - soccer.ballArray[i].getYPosition(),2)));
-            if (poleDist == 4.45) {
-              System.out.println("COLLISION BETWEEN POLE AND BALL");
-            }
-          }
-        }
-      }
+  public void bArray(){
+    for (int i = 0; i<numBalls; i++){
+      ballArray[i].getPosition();
+      ballArray[i].getXVelocity();
+      ballArray[i].getYVelocity();
     }
   }
+
+  public boolean collisionDetection(){
+    for (int i = 0; i<= numBalls-2; i++){
+      for (int j = 1 + i; j<= numBalls-1; j++){
+        double ballX = ballArray[0].getPosition()[0] - ballArray[1].getPosition()[0];
+        double distX = Math.pow(ballX ,2);
+        double ballY = ballArray[0].getPosition()[1] - ballArray[1].getPosition()[1];
+        double distY = Math.pow(ballY,2);
+        distance = Math.sqrt(distX + distY);
+        if (distance <=((9)/12)){
+          System.out.println("COLLISION");
+          return true;
+        }
+        return false;
+      }
+    }
+    return false;
+  }
+
+
+  public static void main( String args[] ){
+    Timer timer = new Timer(1);
+    SoccerSim soccer = new SoccerSim();
+
+    while (soccer.collisionDetection()){
+      soccer.bArray();
+      timer.tick();
+      if (soccer.collisionDetection() == true){
+        break;
+      }
+      continue;
+    }
+  }
+}
