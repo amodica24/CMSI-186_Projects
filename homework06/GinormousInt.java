@@ -28,9 +28,6 @@
  public static final GinormousInt ONE      = new GinormousInt(  "1" );      /// Constant for "one"
  public static final GinormousInt TEN      = new GinormousInt( "10" );      /// Constant for "ten"
 
-   /// Some constants for other intrinsic data types
-   ///  these can help speed up the math if they fit into the proper memory space
-
   // public static final GinormousInt MAX_INT  = new GinormousInt( new Integer( Integer.MAX_VALUE ).toString() );
   // public static final GinormousInt MIN_INT  = new GinormousInt( new Integer( Integer.MIN_VALUE ).toString() );
   // public static final GinormousInt MAX_LONG = new GinormousInt( new Long( Long.MAX_VALUE ).toString() );
