@@ -28,6 +28,9 @@
  public static final GinormousInt ONE      = new GinormousInt(  "1" );      /// Constant for "one"
  public static final GinormousInt TEN      = new GinormousInt( "10" );      /// Constant for "ten"
 
+   /// Some constants for other intrinsic data types
+   ///  these can help speed up the math if they fit into the proper memory space
+
   // public static final GinormousInt MAX_INT  = new GinormousInt( new Integer( Integer.MAX_VALUE ).toString() );
   // public static final GinormousInt MIN_INT  = new GinormousInt( new Integer( Integer.MIN_VALUE ).toString() );
   // public static final GinormousInt MAX_LONG = new GinormousInt( new Long( Long.MAX_VALUE ).toString() );
@@ -36,7 +39,6 @@
    private String sBigInt;
    private String reversed = "";
    private int [] intArray;
-   private int currentIntLength;
    private int ginoSign;
 
    private int ginoSize;
@@ -76,13 +78,6 @@
      return sBigInt;
    }
 
-   public static String toString( int[] args ) {
-     String sGino = "";
-     for (int i = 0; i < args.length; i++) {
-       sGino = sGino + Integer.toString( args[i]);
-     }
-     return sGino;
-   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to check the sign of the GinormousInt
@@ -123,28 +118,40 @@
    *        THAT was easy.....
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public int compareTo(GinormousInt value){
-     if (checkSign() == false && value.checkSign() == true) {
-       compare = 1;
-     } else {
-       return -1;
-     }
-
-     if( value.toString().length() == toString().length() ) {
-       for( int i = 0; i < toString().length(); i++ ) {
-         if( toString().charAt(i) > value.toString().charAt(i) ) {
-           compare = 1;
-         } else if( toString().charAt(i) < value.toString().charAt(i) ){
-           compare = -1;
-         } else {
-           compare = 0;
+     if (value.checkSign() == false && checkSign() == false){
+       if (intArray.length > value.intArray.length) {
+         return 1;
+       } else if (intArray.length < value.intArray.length) {
+         return -1;
+       } else if (intArray.length == value.intArray.length) {
+         for (int i = 0; i < intArray.length; i++) {
+           if (intArray[i] > value.intArray[i]) {
+             return 1;
+           } else if (intArray[i] == value.intArray[i]){
+             return 0;
+           } else if (intArray[i] < value.intArray[i]) {
+             return -1;
+           }
          }
        }
-     } else if( value.toString().length() > toString().length() ) {
-       compare = -1;
-     } else {
-       compare = 1;
+     } else if (value.checkSign() == true && checkSign() == true) {
+       if (intArray.length < value.intArray.length) {
+         return 1;
+       } else if (intArray.length > value.intArray.length) {
+         return -1;
+       } else if (intArray.length == value.intArray.length) {
+         for (int i = 1; i < intArray.length + 1; i++) {
+           if (intArray[i] < value.intArray[i]) {
+             return 1;
+           } else if (intArray[i] > value.intArray[i]) {
+             return -1;
+           } else if (intArray[i] == value.intArray[i]) {
+             return 0;
+           }
+         }
+       }
      }
-     return compare;
+     return -1;
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,10 +164,6 @@
      reversed = sReverse.reverse().toString();
      return new GinormousInt(reversed);
    }
-   public GinormousInt changeSign() {
-     ginoSign = intArray[intArray.length - 1] = intArray[intArray.length - 1] * -1;
-     return this;
-   }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a GinormousInt passed as argument to this GinormousInt using int array
@@ -168,19 +171,64 @@
    *  @return GinormousInt that is the sum of the value of this GinormousInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public GinormousInt addInt( GinormousInt value ) {
-     throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
+     int newSize = Math.max(ginoSize, value.ginoSize);
+     int [] digits = new int[newSize];
+
+     int result = 0;
+     int carry = 0;
+
+     for (int i=0; i < newSize - 1; i++) {
+       int temp = 0;
+
+       if (i < ginoSize ) {
+         temp += intArray[i];
+       }
+
+       if (i < value.ginoSize) {
+         temp += value.intArray[i];
+       }
+
+       temp += carry;
+
+       digits[i] = temp % 10;
+       carry = temp/10;
+     }
+
+     if (carry == 1){
+       digits[newSize - 1] = 1;
+     } else {
+       digits[newSize - 1] = 0;
+     }
+
+     return new GinormousInt(Arrays.toString(digits));
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   *  Method to subtract the value of a GinormousIntk passed as argument to this GinormousInt using bytes
-  *  @param  gint         GinormousInt to subtract from this
+  *  @param  value         GinormousInt to subtract from this
   *  @return GinormousInt that is the difference of the value of this GinormousInt and the one passed in
   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   */
 
   public GinormousInt subtractInt( GinormousInt value ) {
-    throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
-   }
+    int [] digits = new int[ginoSize];
+    int result = 0;
+    int carry = 0;
+    for (int i = 0; i < ginoSize; i++) {
+      int temp = intArray[i];
+      if (i < value.ginoSize) {
+      temp -= value.intArray[i];
+      }
+      temp -= carry;
+      carry = 0;
+      if (temp < 0) {
+        temp = temp + 10;
+        carry = 1;
+      }
+      digits[i] = temp;
+    }
+    return new GinormousInt(Arrays.toString(digits));
+  }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to multiply the value of a GinormousInt passed as argument to this GinormousInt
@@ -199,19 +247,5 @@
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public GinormousInt divide( GinormousInt value ) {
      throw new UnsupportedOperationException( "\n         Sorry, that operation is not yet implemented." );
-   }
-
-   public static void main( String[] args ) {
-     System.out.println( "\n  Hello, world, from the GinormousInt program!!\n" );
-     System.out.println( "\n   You should run your tests from the GinormousIntTester...\n" );
-     GinormousInt x = new GinormousInt("-10");
-     GinormousInt y = new GinormousInt("10");
-     System.out.println(x.reverser("10"));
-     System.out.println(y.compareTo(x));
-     System.out.println(y.addInt(x));
-
-
-
-
    }
  }
