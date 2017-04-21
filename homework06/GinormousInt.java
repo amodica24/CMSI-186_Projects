@@ -43,13 +43,15 @@
 
    private int ginoSize;
    int signMag = 0;
-   private int compare;
+   private int comparison;
    private String sReverse;
    private String intString = "";
    private int [] result;
+   private int tempInt = 0;
+   private int carry = 0;
+   private int index = 0;
 
    public GinormousInt( String value ) {
-     int index = 0;
      double parseValue = Double.parseDouble(value);
      if ( parseValue < 0) {
        signMag = 1;
@@ -72,7 +74,7 @@
      if( signMag == 1 ) {
        sBigInt = "-";
      }
-     for( int i = 1; i < intArray.length; i++) {
+     for( int i = 0; i < intArray.length; i++) {
        sBigInt = sBigInt + Integer.toString( intArray[i] );
      }
      return sBigInt;
@@ -99,17 +101,17 @@
    *        also using the java String "equals()" method -- THAT was easy, too..........
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-   public boolean equals( GinormousInt x ) {
-     if (x instanceof GinormousInt) {
-       GinormousInt g = (GinormousInt) x;
-       if (g.ginoSize != this.ginoSize) {
+   public boolean equals(Object x) {
+     if (sBigInt.length() == x.toString().length()){
+       for (int i = 0; i < x.toString().length(); i++) {
+         if (sBigInt.charAt(i) == x.toString().charAt(i)) {
+           return true;
+         }
          return false;
        }
-       return this.compareTo(g) == 0;
      }
      return false;
    }
-
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to compare a GinormousInt passed as argument to this GinormousInt
    *  @param  value  GinormousInt to add to this
@@ -155,17 +157,6 @@
    }
 
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   *  Method to reverse the value of this GinormousInt
-   *  @return GinormousInt that is the reverse of the value of this GinormousInt
-   *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-
-   public GinormousInt reverser(){
-     StringBuffer sReverse = new StringBuffer(toString());
-     reversed = sReverse.reverse().toString();
-     return new GinormousInt(reversed);
-   }
-
-  /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to add the value of a GinormousInt passed as argument to this GinormousInt using int array
    *  @param  value         GinormousInt to add to this
    *  @return GinormousInt that is the sum of the value of this GinormousInt and the one passed in
@@ -174,24 +165,20 @@
      int newSize = Math.max(ginoSize, value.ginoSize);
      int [] digits = new int[newSize];
 
-     int result = 0;
-     int carry = 0;
-
-     for (int i=0; i < newSize - 1; i++) {
-       int temp = 0;
+     for (int i = 0; i < newSize - 1; i++) {
 
        if (i < ginoSize ) {
-         temp += intArray[i];
+         tempInt += intArray[i];
        }
 
        if (i < value.ginoSize) {
-         temp += value.intArray[i];
+         tempInt += value.intArray[i];
        }
 
-       temp += carry;
+       tempInt += carry;
 
-       digits[i] = temp % 10;
-       carry = temp/10;
+       digits[i] = tempInt % 10;
+       carry = tempInt / 10;
      }
 
      if (carry == 1){
@@ -212,20 +199,18 @@
 
   public GinormousInt subtractInt( GinormousInt value ) {
     int [] digits = new int[ginoSize];
-    int result = 0;
-    int carry = 0;
     for (int i = 0; i < ginoSize; i++) {
-      int temp = intArray[i];
+      int tempInt = intArray[i];
       if (i < value.ginoSize) {
-      temp -= value.intArray[i];
+      tempInt -= value.intArray[i];
       }
-      temp -= carry;
+      tempInt -= carry;
       carry = 0;
-      if (temp < 0) {
-        temp = temp + 10;
+      if (tempInt < 0) {
+        tempInt = tempInt + 10;
         carry = 1;
       }
-      digits[i] = temp;
+      digits[i] = tempInt;
     }
     return new GinormousInt(Arrays.toString(digits));
   }
