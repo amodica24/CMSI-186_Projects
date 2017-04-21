@@ -50,19 +50,26 @@
    private int tempInt = 0;
    private int carry = 0;
    private int index = 0;
-   public boolean isEquals;
+   private boolean isEquals = false;
 
    public GinormousInt( String value ) {
-     ginoSize = value.length();
-     double parseValue = Double.parseDouble(value);
-     if ( parseValue < 0) {
+     intArray = new int[ginoSize];
+
+     if (value.charAt(0) == '+') {
+       signMag = 0;
+       intArray = new int [value.length() - 1];
+       for (int i = 1; i < value.length(); i ++) {
+         intArray[index] = Character.getNumericValue(value.charAt(i));
+         index++;
+       }
+     } else if (value.charAt(0) == '-') {
        signMag = 1;
        intArray = new int [value.length() - 1];
        for (int i = 1; i < value.length(); i ++) {
          intArray[index] = Character.getNumericValue(value.charAt(i));
          index++;
        }
-     } else {
+     } else{
        intArray = new int [value.length()];
        for (int i = 0; i < value.length(); i ++) {
          intArray[index] = Character.getNumericValue(value.charAt(i));
@@ -85,15 +92,17 @@
      return sBigInt;
    }
 
-
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to check the sign of the GinormousInt
    *  @param  value     GinormousInt to compare to this
    *  @return boolean  that is true if the value is negative and false if the value is positive
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
   public boolean checkSign() {
-    if (signMag == 1) {
+    if (sBigInt.charAt(0) == '-') {
       return true;
+    }
+    if (sBigInt.charAt(0) == '+') {
+      return false;
     }
     return false;
   }
@@ -113,10 +122,9 @@
            isEquals = false;
          } else {
            isEquals = true;
+           break;
          }
        }
-     } else {
-       isEquals = false;
      }
      return isEquals;
    }
@@ -171,10 +179,10 @@
    *  @return GinormousInt that is the sum of the value of this GinormousInt and the one passed in
    *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
    public GinormousInt addInt( GinormousInt value ) {
-     int newSize = Math.max(ginoSize, value.ginoSize);
+     int newSize = toString().length();
      int [] digits = new int[newSize];
 
-     for (int i = 0; i < newSize - 1; i++) {
+     for (int i = 0; i < newSize; i++) {
 
        if (i < ginoSize ) {
          tempInt += intArray[i];
