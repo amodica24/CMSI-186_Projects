@@ -52,6 +52,7 @@
    private int index = 0;
 
    public GinormousInt( String value ) {
+     ginoSize = value.length();
      double parseValue = Double.parseDouble(value);
      if ( parseValue < 0) {
        signMag = 1;
