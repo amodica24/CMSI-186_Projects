@@ -50,6 +50,7 @@
    private int tempInt = 0;
    private int carry = 0;
    private int index = 0;
+   public boolean isEquals;
 
    public GinormousInt( String value ) {
      ginoSize = value.length();
@@ -74,7 +75,10 @@
      sBigInt = "";
      if( signMag == 1 ) {
        sBigInt = "-";
+     } else {
+       sBigInt = "";
      }
+
      for( int i = 0; i < intArray.length; i++) {
        sBigInt = sBigInt + Integer.toString( intArray[i] );
      }
@@ -104,15 +108,19 @@
 
    public boolean equals(Object x) {
      if (sBigInt.length() == x.toString().length()){
-       for (int i = 0; i < x.toString().length(); i++) {
-         if (sBigInt.charAt(i) == x.toString().charAt(i)) {
-           return true;
+       for (int i = 0; i < sBigInt.length(); i++) {
+         if (sBigInt.charAt(i) != x.toString().charAt(i)) {
+           isEquals = false;
+         } else {
+           isEquals = true;
          }
-         return false;
        }
+     } else {
+       isEquals = false;
      }
-     return false;
+     return isEquals;
    }
+
   /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    *  Method to compare a GinormousInt passed as argument to this GinormousInt
    *  @param  value  GinormousInt to add to this
