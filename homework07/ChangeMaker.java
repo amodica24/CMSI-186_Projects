@@ -3,7 +3,7 @@
  * Purpose    :  Program to represent the optimal nunber if coins.
  * @author    :  Anthony Modica
  * Date       :  2017-04-29
- * Description:  
+ * Description:
  * Notes      :  None
  * Warnings   :  None
  *
@@ -77,7 +77,7 @@ public class ChangeMaker {
     * A method to find the optimal number, or least number of coins for the given amount.
     * @param    denominations   array   containing each argument starting with args[0]
     * @param    amount          int     the amount of cents
-    * @return                   array 
+    * @return                   array
     */
 
     public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int amount) {
@@ -110,10 +110,13 @@ public class ChangeMaker {
             }
             if (i != 0){
               if (denominations[i] <= j ){
-                e[i]= 1;
-                table[i][j] = new Tuple(e);
                 if (table[i - 1 ][j] != Tuple.IMPOSSIBLE){
-                  table[i][j] = table[i - 1][j];
+                  if ( (table[i][j].total()  < (table[i][j - 1]).total()) ) {
+                    table[i][j] = table[i][j];
+                  } else {
+                    table[i][j] = table[i][j - 1];
+                  }
+
                 } else {
                   table[i][j] = Tuple.IMPOSSIBLE;
                 }
