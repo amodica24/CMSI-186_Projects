@@ -110,15 +110,16 @@ public class ChangeMaker {
             }
             if (i != 0){
               if (denominations[i] <= j ){
+                e[i]= 1;
+                table[i][j] = new Tuple(e);
                 if (table[i - 1 ][j] != Tuple.IMPOSSIBLE){
+                  table[i][j] = table[i - 1][j];
+                } else {
                   if ( (table[i][j].total()  < (table[i][j - 1]).total()) ) {
                     table[i][j] = table[i][j];
                   } else {
                     table[i][j] = table[i][j - 1];
                   }
-
-                } else {
-                  table[i][j] = Tuple.IMPOSSIBLE;
                 }
               } else {
                 table[i][j] = Tuple.IMPOSSIBLE;
