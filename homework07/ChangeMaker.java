@@ -137,9 +137,4 @@ public class ChangeMaker {
     private static String getSimplePluralSuffix(int count) {
         return count == 1 ? "" : "s";
     }
-
-}
- ? "" : "s";
-    }
-
 }
