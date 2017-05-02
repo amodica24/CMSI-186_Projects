@@ -13,6 +13,8 @@
  *   Ver      Date     Modified by:  Reason for change or modification
  *  -----  ----------  ------------  ---------------------------------------------------------------------
  *  1.0.0  2017-04-19  Anthony Modica Initial draft
+ *  1.0.0  2017-04-28  Anthony Modica Second draft
+ *  1.0.0  2017-05-01  Anthony Modica Third draft
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
 public class ChangeMaker {
@@ -82,8 +84,7 @@ public class ChangeMaker {
 
     public static Tuple makeChangeWithDynamicProgramming(int[] denominations, int amount) {
       Tuple[][] table = new Tuple[denominations.length][amount + 1];
-      int count = denominations.length;
-      int [] e = new int[count];
+      int [] e = new int[denominations.length];
 
       for(int i = 0; i < denominations.length; i ++) {
         for (int j = 0; j < amount + 1; j++){
@@ -126,7 +127,7 @@ public class ChangeMaker {
               }
             }
           }
-          System.out.println(table[i][j]);
+          // System.out.println(table[i][j]);
         }
       }
       return table[denominations.length-1][amount];
