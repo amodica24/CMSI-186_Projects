@@ -1,6 +1,6 @@
 /** ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * File name  :  TupleTester.java
- * Purpose    :  Test  for the Tuple class
+ * Purpose    :  Test harness for the Tuple class
  * @author    :  Professor Don Murphy
  * @author    :  B.J. Johnson totally ripped off from the original; thanks Professor Murphy!
  * Date       :  2017-04-19
@@ -22,6 +22,7 @@
  *                                    "hashCode" method
  *
  *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 public class TupleTester {
 
    private static int attempts  = 0;
