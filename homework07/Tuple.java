@@ -119,7 +119,7 @@ public class Tuple {
 
   /**
    * Returns the total of the elements in this tuple. For example, the
-   *   three-element tuple <9,3,2> has a total of 14.
+   * three-element tuple <9,3,2> has a total of 14.
    *
    * @return the total of the elements of this tuple
    */
